@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('contacts', function (Blueprint $table) {
-            $table->foreignIdFor(Client::class);
+            $table->foreignIdFor(Client::class)->nullable();
             $table->string('nombre', 60);
             $table->string('telefono', 10);
             $table->string('whatsapp', 10);
