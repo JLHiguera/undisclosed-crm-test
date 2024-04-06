@@ -2,18 +2,19 @@
 
 namespace Tests\Feature;
 
+use App\Models\Client;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ContactTest extends TestCase
 {
-
     use RefreshDatabase;
 
     /**
-     * A basic feature test example.
+     * Create and get contact on client.
      */
+    /** @test */
     public function create_contact_on_client(): void
     {
         $client = Client::factory()->create();
@@ -34,13 +35,13 @@ class ContactTest extends TestCase
             'puesto' => 'CTO',
         ];
 
-        $this->postJson("/api/client/{$client->id}/contact", $contact_data1)
+        $this->postJson("/api/clients/{$client->id}/contact", $contact_data1)
             ->assertCreated();
 
-        $this->postJson("/api/client/{$client->id}/contact", $contact_data2)
-        ->assertCreated();
+        $this->postJson("/api/clients/{$client->id}/contact", $contact_data2)
+            ->assertCreated();
 
-        $this->get("/api/client/{$client->id}")
+        $this->get("/api/clients/{$client->id}")
             ->assertJsonFragment($contact_data1)
             ->assertJsonFragment($contact_data2);
     }
