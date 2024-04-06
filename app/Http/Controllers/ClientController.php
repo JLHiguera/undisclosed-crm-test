@@ -15,7 +15,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return new ClientCollection(Client::active()->paginate());
+        $clients = Client::with('contacts')->active()->paginate();
+
+        return new ClientCollection($clients);
     }
 
     /**
@@ -35,7 +37,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        return new ClientResource($client);
+        return new ClientResource($client->load('contacts')->first());
     }
 
     /**

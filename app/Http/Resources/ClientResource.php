@@ -23,6 +23,8 @@ class ClientResource extends JsonResource
             'giro' => $this->giro,
             'url' => $this->url,
             'fase_venta' => $this->fase_venta,
+            'contacts' => ContactResource::collection($this->whenLoaded('contacts', $this->contacts)),
+            //'contacts' => $this->whenLoaded('contacts', new ContactCollection($this->contacts)),
         ];
     }
 }

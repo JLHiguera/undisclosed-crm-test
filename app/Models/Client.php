@@ -29,4 +29,12 @@ class Client extends Model
     {
         return $this->whereNull('deleted_at');
     }
+
+    /**
+     * Returns client's contacts.
+     */
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class, 'client_id');
+    }
 }
