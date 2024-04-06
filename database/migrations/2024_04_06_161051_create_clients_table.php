@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->string('nombre', 60);
+            $table->string('razon_social', 10);
             $table->string('direccion', 200);
             $table->decimal('estimacion_venta', 12, 2);
-            $table->text('observaciones');
-            $table->string('giro', 45);
-            $table->string('url', 100);
-            $table->enum('fase_venta', ['iniciada', 'procesando', 'completada', 'rechazada']);
+            $table->text('observaciones')->nullable();
+            $table->string('giro', 45)->nullable();
+            $table->string('url', 100)->nullable();
+            $table->enum('fase_venta', ['iniciada', 'procesando', 'completada', 'rechazada'])->default('iniciada');
             $table->timestamps();
             $table->softDeletes();
         });
